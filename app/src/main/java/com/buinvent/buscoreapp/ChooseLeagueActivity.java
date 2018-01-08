@@ -12,16 +12,26 @@ public class ChooseLeagueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_league);
+    }
 
+    public void onLeagueSelected(View v) {
+        switch(v.getId()) {
+            case R.id.button_nfl:
+                startMatchupActivity("nfl");
+                break;
+            case R.id.button_nba:
+                startMatchupActivity("nba");
+                break;
+            case R.id.button_nhl:
+                startMatchupActivity("nhl");
+                break;
+            case R.id.button_mlb:
+                startMatchupActivity("mlb");
+                break;
+        }
+    }
 
-        Button btn = (Button)findViewById(R.id.nfl_btn);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ChooseLeagueActivity.this, ChooseMatchupActivity.class));
-            }
-        });
-
+    private void startMatchupActivity(String league) {
+        startActivity(new Intent(ChooseLeagueActivity.this, ChooseMatchupActivity.class));
     }
 }
