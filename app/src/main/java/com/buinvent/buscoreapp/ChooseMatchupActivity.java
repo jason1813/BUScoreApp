@@ -6,66 +6,69 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.net.URL;
-import java.net.URLEncoder;
-
-import android.util.Base64;
-//import org.apache.commons.codec.binary.Base64;
+import java.net.URLConnection;
 
 public class ChooseMatchupActivity extends AppCompatActivity {
+
+    /* Data API URL and authentication. */
+    private static final String API_FEED_URL = "https://api.mysportsfeeds.com/v1.1/pull/nfl/2017-2018-regular/daily_game_schedule.json?fordate=20171231";
+    private static final String API_USERNAME = "buinvent";
+    private static final String API_PASSWORD = "GoBucks";
+
+    /* Debug tag. */
+    private static final String TAG = "ChooseMatchupActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_matchup);
-        new RetrieveFeedTask().execute();
 
+        // Set API Authentication.
+        Authenticator.setDefault(new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(API_USERNAME, API_PASSWORD.toCharArray());
+            }
+        });
+
+        // Get data feed from API
+        new RetrieveFeedTask().execute(API_FEED_URL);
     }
 
-    class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
+    class RetrieveFeedTask extends AsyncTask<String, Void, String> {
 
-        protected void onPreExecute() {
-        }
+        protected void onPreExecute() {}
 
-        protected String doInBackground(Void... urls) {
+        protected String doInBackground(String... urls) {
+            String url = urls[0];
+            String response = null;
 
             try {
-//                URL url = new URL("https://jsonparsingdemo-cec5b.firebaseapp.com/jsonData/moviesDemoItem.txt");
-                URL url = new URL ("https://api.mysportsfeeds.com/v1.1/pull/nfl/2017-2018-regular/daily_game_schedule.json?fordate=20171231");
-                String encoding = Base64.encodeToString("buinvent:GoBucks".getBytes(), Base64.NO_WRAP);
+                // Set up HTTP Connection
+                URLConnection connection = new URL(url).openConnection();
+                InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
+                BufferedReader in = new BufferedReader(streamReader);
 
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setDoOutput(true);
-                connection.setRequestProperty  ("Authorization", "Basic " + encoding);
-                InputStream content = (InputStream)connection.getInputStream();
-                BufferedReader in   =
-                        new BufferedReader (new InputStreamReader (content));
-                String line;
+                // Read HTTP response.
                 StringBuilder stringBuilder = new StringBuilder();
+                String line;
                 while ((line = in.readLine()) != null) {
                     stringBuilder.append(line).append("\n");
-                    System.out.println(line);
                 }
-                return stringBuilder.toString();
+                response = stringBuilder.toString();
+
             } catch(Exception e) {
-                e.printStackTrace();
-                return null;
+                Log.e(TAG, "Exception", e);
             }
 
-
+            return response;
         }
 
         protected void onPostExecute(String response) {
-            if(response == null) {
-                response = "THERE WAS AN ERROR";
-            }
-            Log.i("INFO", response);
-            System.out.println(response);
-            // TODO: check this.exception
+            Log.v(TAG, "HTTP Response: " + response);
             // TODO: do something with the feed
 
 //            try {
@@ -82,5 +85,4 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 //            }
         }
     }
-
 }
