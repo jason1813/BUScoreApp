@@ -38,7 +38,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         new RetrieveFeedTask().execute(API_FEED_URL);
     }
 
-    class RetrieveFeedTask extends AsyncTask<String, Void, String> {
+    private static class RetrieveFeedTask extends AsyncTask<String, Void, String> {
 
         protected void onPreExecute() {}
 
