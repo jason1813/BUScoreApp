@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.buinvent.buscoreapp.ChooseLeagueActivity">
 
@@ -13,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        android:text="Choose Your League"
+        android:layout_marginBottom="8dp"
+        android:text="@string/header_choose_league"
         android:textAlignment="center"
         android:textSize="35sp" />
 
@@ -21,47 +23,39 @@
         android:id="@+id/nfl_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="@dimen/league_button_margin"
         android:padding="15dp"
-        android:text="NFL"
+        android:text="@string/button_nfl"
         android:textSize="52sp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/nba_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="@dimen/league_button_margin"
         android:padding="15dp"
-        android:text="NBA"
+        android:text="@string/button_nba"
         android:textSize="52sp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/nhl_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="@dimen/league_button_margin"
         android:padding="15dp"
-        android:text="NHL"
+        android:text="@string/button_nhl"
         android:textSize="52sp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/mlb_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="7dp"
         android:padding="15dp"
-        android:text="MLB"
+        android:text="@string/button_mlb"
         android:textSize="52sp"
         android:textStyle="bold" />
 </LinearLayout>
