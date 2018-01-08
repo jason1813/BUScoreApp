@@ -25,7 +25,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.choose_matchup);
+        setContentView(R.layout.activity_choose_matchup);
 
         // Set API Authentication.
         Authenticator.setDefault(new Authenticator() {
