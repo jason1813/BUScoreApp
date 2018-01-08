@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ChooseLeague extends AppCompatActivity {
+public class ChooseLeagueActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class ChooseLeague extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChooseLeague.this, ChooseMatchupActivity.class));
+                startActivity(new Intent(ChooseLeagueActivity.this, ChooseMatchupActivity.class));
             }
         });
 
