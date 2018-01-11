@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ScrollView;
+import android.widget.Scroller;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +45,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
             matchupButtons[i] = new Button(this);
         }
 
-        ll = (LinearLayout)findViewById(R.id.matchup_layout);
+        ll = (LinearLayout) findViewById(R.id.linear_matchup_layout);
         lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
         // Set API Authentication.
@@ -95,18 +97,13 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                 JSONObject obj = new JSONObject(response);
                 JSONArray games = obj.getJSONObject("dailygameschedule").getJSONArray("gameentry");
 
-                String awayteam1 = games.getJSONObject(0).getJSONObject("awayTeam").getString("Name");
-                String hometeam1 = games.getJSONObject(0).getJSONObject("homeTeam").getString("Name");
-
-                System.out.println("awayteam1 = " + awayteam1);
-                System.out.println("hometeam1 = " + hometeam1);
-
                 for (int i = 0; i < games.length(); i++){
                     String awayteam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
                     String hometeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
 
                     matchupButtons[i].setText(awayteam + "\n" + hometeam);
                     ll.addView(matchupButtons[i], lp);
+
                 }
 
             } catch (JSONException e) {
