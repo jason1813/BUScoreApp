@@ -29,18 +29,22 @@ public class ChooseMatchupActivity extends AppCompatActivity {
     /* Debug tag. */
     private static final String TAG = "ChooseMatchupActivity";
 
+    LinearLayout ll;
+    LayoutParams lp;
+    Button matchupButtons[] = new Button[50];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_matchup);
 
-        Button myButton = new Button(this);
-        myButton.setText("Push Me");
+        for(int i = 0; i < 50; i++) {
+            matchupButtons[i] = new Button(this);
+        }
 
-        LinearLayout ll = (LinearLayout)findViewById(R.id.matchup_layout);
-        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        ll.addView(myButton, lp);
+        ll = (LinearLayout)findViewById(R.id.matchup_layout);
+        lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
         // Set API Authentication.
         Authenticator.setDefault(new Authenticator() {
@@ -53,7 +57,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         new RetrieveFeedTask().execute(API_FEED_URL);
     }
 
-    private static class RetrieveFeedTask extends AsyncTask<String, Void, String> {
+    class RetrieveFeedTask extends AsyncTask<String, Void, String> {
 
         protected void onPreExecute() {}
 
@@ -97,6 +101,13 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                 System.out.println("awayteam1 = " + awayteam1);
                 System.out.println("hometeam1 = " + hometeam1);
 
+                for (int i = 0; i < games.length(); i++){
+                    String awayteam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
+                    String hometeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
+
+                    matchupButtons[i].setText(awayteam + "\n" + hometeam);
+                    ll.addView(matchupButtons[i], lp);
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
