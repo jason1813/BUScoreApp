@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">BUScoreApp</string>
     <string name="header_choose_league">Choose Your League</string>
+    <string name="header_choose_matchup">Choose Your Matchup</string>
     <string name="button_nfl">NFL</string>
     <string name="button_nba">NBA</string>
     <string name="button_nhl">NHL</string>

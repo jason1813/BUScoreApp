@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll_matchup_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     tools:context="com.buinvent.buscoreapp.ChooseMatchupActivity">
 
-    <LinearLayout android:id="@+id/linear_matchup_layout"
+    <LinearLayout android:id="@+id/matchup_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
-            android:text="Choose Your Matchup"
+            android:text="@string/header_choose_matchup"
             android:textAlignment="center"
             android:textSize="35sp" />
 

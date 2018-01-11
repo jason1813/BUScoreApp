@@ -7,8 +7,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ScrollView;
-import android.widget.Scroller;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +29,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
     /* Debug tag. */
     private static final String TAG = "ChooseMatchupActivity";
 
+    /* Matchup XML content */
     LinearLayout ll;
     LayoutParams lp;
     Button matchupButtons[] = new Button[50];
@@ -41,12 +40,13 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_matchup);
 
+        // Initialize XML content
+        ll = (LinearLayout) findViewById(R.id.matchup_layout);
+        lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+
         for(int i = 0; i < 50; i++) {
             matchupButtons[i] = new Button(this);
         }
-
-        ll = (LinearLayout) findViewById(R.id.linear_matchup_layout);
-        lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
         // Set API Authentication.
         Authenticator.setDefault(new Authenticator() {
@@ -90,18 +90,20 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
         protected void onPostExecute(String response) {
             Log.v(TAG, "HTTP Response: " + response);
-            // TODO: do something with the feed
 
+            /* Grab all matchups from API and add them to the layout */
             try{
 
                 JSONObject obj = new JSONObject(response);
                 JSONArray games = obj.getJSONObject("dailygameschedule").getJSONArray("gameentry");
 
                 for (int i = 0; i < games.length(); i++){
-                    String awayteam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
-                    String hometeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
+                    
+                    String awayTeam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
+                    String homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
+                    String matchUpStr = awayTeam + "\n" + homeTeam;
 
-                    matchupButtons[i].setText(awayteam + "\n" + hometeam);
+                    matchupButtons[i].setText(matchUpStr);
                     ll.addView(matchupButtons[i], lp);
 
                 }
@@ -109,19 +111,6 @@ public class ChooseMatchupActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-//            try {
-//                JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
-//                String requestID = object.getString("requestId");
-//                int likelihood = object.getInt("likelihood");
-//                JSONArray photos = object.getJSONArray("photos");
-//                .
-//                .
-//                .
-//                .
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
         }
     }
 }
