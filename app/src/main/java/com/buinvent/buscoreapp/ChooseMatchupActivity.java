@@ -20,6 +20,8 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class ChooseMatchupActivity extends AppCompatActivity {
 
@@ -40,10 +42,12 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_matchup);
+        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
 
         Intent leagueIntent = getIntent();
         String league = leagueIntent.getStringExtra("league");
-        String apiFeedUrl = "https://api.mysportsfeeds.com/v1.1/pull/" + league + "/2017-2018-regular/daily_game_schedule.json?fordate=20171231";
+        String apiFeedUrl = "https://api.mysportsfeeds.com/v1.1/pull/" + league +
+                "/2017-2018-regular/daily_game_schedule.json?fordate=" + timeStamp;
 
         // Initialize XML content
         ll = findViewById(R.id.matchup_layout);
