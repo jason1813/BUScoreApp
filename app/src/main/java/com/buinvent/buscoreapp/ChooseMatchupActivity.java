@@ -50,7 +50,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
         /* initialize API URL */
         String apiFeedUrl = "https://api.mysportsfeeds.com/v1.1/pull/" + league +
-                "/2017-2018-regular/daily_game_schedule.json?fordate=" + timeStamp;
+                "/current/daily_game_schedule.json?fordate=" + timeStamp;
 
         // Initialize XML content
         ll = findViewById(R.id.matchup_layout);
