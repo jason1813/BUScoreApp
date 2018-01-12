@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -41,12 +42,15 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_matchup);
 
         // Initialize XML content
-        ll = (LinearLayout) findViewById(R.id.matchup_layout);
+        ll = findViewById(R.id.matchup_layout);
         lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
         for(int i = 0; i < 50; i++) {
             matchupButtons[i] = new Button(this);
+            matchupButtons[i].setTextSize(30);
+            matchupButtons[i].setGravity(Gravity.START);
         }
+
 
         // Set API Authentication.
         Authenticator.setDefault(new Authenticator() {
