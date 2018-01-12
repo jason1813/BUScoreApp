@@ -42,10 +42,13 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_matchup);
-        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
 
+        /* get the league that was selected and current date */
         Intent leagueIntent = getIntent();
         String league = leagueIntent.getStringExtra("league");
+        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+
+        /* initialize API URL */
         String apiFeedUrl = "https://api.mysportsfeeds.com/v1.1/pull/" + league +
                 "/2017-2018-regular/daily_game_schedule.json?fordate=" + timeStamp;
 
@@ -53,6 +56,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         ll = findViewById(R.id.matchup_layout);
         lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
+        /* initialize all buttons, set the text size, and make them left aligned */
         for(int i = 0; i < 50; i++) {
             matchupButtons[i] = new Button(this);
             matchupButtons[i].setTextSize(30);
