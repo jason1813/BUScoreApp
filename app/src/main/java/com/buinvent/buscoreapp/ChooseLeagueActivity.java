@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class ChooseLeagueActivity extends AppCompatActivity {
 
@@ -32,6 +31,10 @@ public class ChooseLeagueActivity extends AppCompatActivity {
     }
 
     private void startMatchupActivity(String league) {
-        startActivity(new Intent(ChooseLeagueActivity.this, ChooseMatchupActivity.class));
+
+        Intent chooseLeague = new Intent(ChooseLeagueActivity.this, ChooseMatchupActivity.class);
+        chooseLeague.putExtra("league", league);
+        startActivity(chooseLeague);
+
     }
 }

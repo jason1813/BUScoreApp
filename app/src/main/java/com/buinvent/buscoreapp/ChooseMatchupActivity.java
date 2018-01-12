@@ -1,5 +1,6 @@
 package com.buinvent.buscoreapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import java.net.URLConnection;
 public class ChooseMatchupActivity extends AppCompatActivity {
 
     /* Data API URL and authentication. */
-    private static final String API_FEED_URL = "https://api.mysportsfeeds.com/v1.1/pull/nfl/2017-2018-regular/daily_game_schedule.json?fordate=20171231";
     private static final String API_USERNAME = "buinvent";
     private static final String API_PASSWORD = "GoBucks";
 
@@ -40,6 +40,10 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_matchup);
+
+        Intent leagueIntent = getIntent();
+        String league = leagueIntent.getStringExtra("league");
+        String apiFeedUrl = "https://api.mysportsfeeds.com/v1.1/pull/" + league + "/2017-2018-regular/daily_game_schedule.json?fordate=20171231";
 
         // Initialize XML content
         ll = findViewById(R.id.matchup_layout);
@@ -60,7 +64,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         });
 
         // Get data feed from API
-        new RetrieveFeedTask().execute(API_FEED_URL);
+        new RetrieveFeedTask().execute(apiFeedUrl);
     }
 
     class RetrieveFeedTask extends AsyncTask<String, Void, String> {
