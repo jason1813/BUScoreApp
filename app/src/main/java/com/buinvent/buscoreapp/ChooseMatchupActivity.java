@@ -35,7 +35,6 @@ public class ChooseMatchupActivity extends AppCompatActivity {
     /* Matchup XML content */
     LinearLayout ll;
     LayoutParams lp;
-    Button matchupButtons[] = new Button[50];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +54,6 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         // Initialize XML content
         ll = findViewById(R.id.matchup_layout);
         lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-
-        /* initialize all buttons, set the text size, and make them left aligned */
-        for(int i = 0; i < 50; i++) {
-            matchupButtons[i] = new Button(this);
-            matchupButtons[i].setTextSize(30);
-            matchupButtons[i].setGravity(Gravity.START);
-        }
 
 
         // Set API Authentication.
@@ -110,17 +102,24 @@ public class ChooseMatchupActivity extends AppCompatActivity {
             /* Grab all matchups from API and add them to the layout */
             try{
 
+                // grab the current dates matchups in a JSONArray
                 JSONObject obj = new JSONObject(response);
                 JSONArray games = obj.getJSONObject("dailygameschedule").getJSONArray("gameentry");
 
+                /* grab all of the home and away team's names for every matchup, add them to a button,
+                   and add that button to the layout                       */
                 for (int i = 0; i < games.length(); i++){
                     
                     String awayTeam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
                     String homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
                     String matchUpStr = awayTeam + "\n" + homeTeam;
 
-                    matchupButtons[i].setText(matchUpStr);
-                    ll.addView(matchupButtons[i], lp);
+                    Button button = new Button(getApplicationContext());
+                    button.setTextSize(30);
+                    button.setGravity(Gravity.START);
+                    button.setText(matchUpStr);
+
+                    ll.addView( button, lp);
 
                 }
 
