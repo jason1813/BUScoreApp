@@ -24,42 +24,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/league_button_margin"
-        android:padding="15dp"
+        android:drawableLeft="@drawable/nfl_logo"
+        android:onClick="onLeagueSelected"
+        android:paddingBottom="15dp"
+        android:paddingLeft="104dp"
+        android:paddingRight="88dp"
+        android:paddingTop="15dp"
         android:text="@string/button_nfl"
         android:textSize="52sp"
-        android:textStyle="bold"
-        android:onClick="onLeagueSelected" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button_nba"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/league_button_margin"
-        android:padding="15dp"
+        android:drawableLeft="@drawable/nba_logo"
+        android:onClick="onLeagueSelected"
+        android:paddingBottom="15dp"
+        android:paddingLeft="107dp"
+        android:paddingRight="88dp"
+        android:paddingTop="15dp"
         android:text="@string/button_nba"
         android:textSize="52sp"
-        android:textStyle="bold"
-        android:onClick="onLeagueSelected" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button_nhl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/league_button_margin"
-        android:padding="15dp"
+        android:drawableLeft="@drawable/nhl_logo"
+        android:onClick="onLeagueSelected"
+        android:paddingBottom="15dp"
+        android:paddingLeft="94dp"
+        android:paddingRight="88dp"
+        android:paddingTop="15dp"
         android:text="@string/button_nhl"
         android:textSize="52sp"
-        android:textStyle="bold"
-        android:onClick="onLeagueSelected" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button_mlb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:padding="15dp"
+        android:layout_marginTop="@dimen/league_button_margin"
+        android:drawableLeft="@drawable/mlb_logo"
+        android:onClick="onLeagueSelected"
+        android:paddingBottom="15dp"
+        android:paddingLeft="78dp"
+        android:paddingRight="60dp"
+        android:paddingTop="15dp"
         android:text="@string/button_mlb"
         android:textSize="52sp"
-        android:textStyle="bold"
-        android:onClick="onLeagueSelected" />
+        android:textStyle="bold" />
 </LinearLayout>
