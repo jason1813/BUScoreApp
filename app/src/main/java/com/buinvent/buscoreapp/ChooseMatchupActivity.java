@@ -40,6 +40,8 @@ public class ChooseMatchupActivity extends AppCompatActivity {
     LinearLayout ll;
     LayoutParams lp;
 
+    String league;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,7 +50,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
         /* get the league that was selected and current date */
         Intent leagueIntent = getIntent();
-        String league = leagueIntent.getStringExtra("league");
+        league = leagueIntent.getStringExtra("league");
         String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
 
         /* initialize API URL */
@@ -101,6 +103,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String response) {
+
             Log.v(TAG, "HTTP Response: " + response);
             
             /* Grab all matchups from API and add them to the layout */
@@ -118,8 +121,8 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                     String homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name").toLowerCase();
                     String matchUpStr = awayTeam + "\n" + homeTeam;
 
-                    int awayID = getApplicationContext().getResources().getIdentifier("nfl_" + awayTeam, "drawable", getApplicationContext().getPackageName());
-                    int homeID = getApplicationContext().getResources().getIdentifier("nfl_" + homeTeam, "drawable", getApplicationContext().getPackageName());
+                    int awayID = getApplicationContext().getResources().getIdentifier(league + "_" + awayTeam.replaceAll("\\s+",""), "drawable", getApplicationContext().getPackageName());
+                    int homeID = getApplicationContext().getResources().getIdentifier(league + "_" + homeTeam.replaceAll("\\s+",""), "drawable", getApplicationContext().getPackageName());
 
                     BitmapDrawable awayDrawable = (BitmapDrawable) getDrawable(awayID);
                     BitmapDrawable homeDrawable = (BitmapDrawable) getDrawable(homeID);
