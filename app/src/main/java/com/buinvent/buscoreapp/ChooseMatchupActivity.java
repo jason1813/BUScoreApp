@@ -102,24 +102,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
         protected void onPostExecute(String response) {
             Log.v(TAG, "HTTP Response: " + response);
-
-            BitmapDrawable patriotsDrawable = (BitmapDrawable) getDrawable(R.drawable.nfl_patriots);
-            BitmapDrawable titansDrawable = (BitmapDrawable) getDrawable(R.drawable.nfl_titans);
-
-//            patriotsDrawable = resizeDrawable(30,  patriotsDrawable);
-//            titansDrawable = resizeDrawable(30, titansDrawable);
-
-            Drawable[] drawables = new Drawable[2];
-            drawables[0] = patriotsDrawable;
-            drawables[1] = titansDrawable;
-
-            LayerDrawable layerDrawable = new LayerDrawable(drawables);
-            // Notice here how the top of this layer is the button text size. This is opposite of the
-            // other drawable whom's bottom will be the button text size.
-            layerDrawable.setLayerInset(0,0, -75,0,0);
-            layerDrawable.setLayerInset(1,0, 0,0,-75);
-
-
+            
             /* Grab all matchups from API and add them to the layout */
             try{
 
@@ -131,9 +114,25 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                    and add that button to the layout                       */
                 for (int i = 0; i < games.length(); i++){
                     
-                    String awayTeam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
-                    String homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
+                    String awayTeam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name").toLowerCase();
+                    String homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name").toLowerCase();
                     String matchUpStr = awayTeam + "\n" + homeTeam;
+
+                    int awayID = getApplicationContext().getResources().getIdentifier("nfl_" + awayTeam, "drawable", getApplicationContext().getPackageName());
+                    int homeID = getApplicationContext().getResources().getIdentifier("nfl_" + homeTeam, "drawable", getApplicationContext().getPackageName());
+
+                    BitmapDrawable awayDrawable = (BitmapDrawable) getDrawable(awayID);
+                    BitmapDrawable homeDrawable = (BitmapDrawable) getDrawable(homeID);
+
+                    Drawable[] drawables = new Drawable[2];
+                    drawables[0] = awayDrawable;
+                    drawables[1] = homeDrawable;
+
+                    LayerDrawable layerDrawable = new LayerDrawable(drawables);
+                    // Notice here how the top of this layer is the button text size. This is opposite of the
+                    // other drawable whom's bottom will be the button text size.
+                    layerDrawable.setLayerInset(0,0, -75,0,0);
+                    layerDrawable.setLayerInset(1,0, 0,0,-75);
 
                     Button button = new Button(getApplicationContext());
                     button.setTextSize(30);
