@@ -1,6 +1,10 @@
 package com.buinvent.buscoreapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -99,6 +103,23 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         protected void onPostExecute(String response) {
             Log.v(TAG, "HTTP Response: " + response);
 
+            BitmapDrawable patriotsDrawable = (BitmapDrawable) getDrawable(R.drawable.nfl_patriots);
+            BitmapDrawable titansDrawable = (BitmapDrawable) getDrawable(R.drawable.nfl_titans);
+
+//            patriotsDrawable = resizeDrawable(30,  patriotsDrawable);
+//            titansDrawable = resizeDrawable(30, titansDrawable);
+
+            Drawable[] drawables = new Drawable[2];
+            drawables[0] = patriotsDrawable;
+            drawables[1] = titansDrawable;
+
+            LayerDrawable layerDrawable = new LayerDrawable(drawables);
+            // Notice here how the top of this layer is the button text size. This is opposite of the
+            // other drawable whom's bottom will be the button text size.
+            layerDrawable.setLayerInset(0,0, -75,0,0);
+            layerDrawable.setLayerInset(1,0, 0,0,-75);
+
+
             /* Grab all matchups from API and add them to the layout */
             try{
 
@@ -118,6 +139,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                     button.setTextSize(30);
                     button.setGravity(Gravity.START);
                     button.setText(matchUpStr);
+                    button.setCompoundDrawablesWithIntrinsicBounds(layerDrawable, null,null,null);
 
                     ll.addView( button, lp);
 
@@ -127,5 +149,14 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        private BitmapDrawable resizeDrawable(int sizeOfDrawable, BitmapDrawable bitmapDrawable) {
+            Bitmap bitmap = bitmapDrawable.getBitmap();
+            BitmapDrawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap,
+                    sizeOfDrawable,
+                    sizeOfDrawable, true));
+            return d;
+        }
+
     }
 }
