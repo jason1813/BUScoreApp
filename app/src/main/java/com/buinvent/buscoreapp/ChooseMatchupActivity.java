@@ -127,8 +127,8 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                     Drawable[] drawables = new Drawable[2];
                     drawables[0] = awayDrawable;
                     drawables[1] = homeDrawable;
-
                     LayerDrawable layerDrawable = new LayerDrawable(drawables);
+
                     // Notice here how the top of this layer is the button text size. This is opposite of the
                     // other drawable whom's bottom will be the button text size.
                     layerDrawable.setLayerInset(0,0, -75,0,0);
@@ -148,14 +148,5 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
-        private BitmapDrawable resizeDrawable(int sizeOfDrawable, BitmapDrawable bitmapDrawable) {
-            Bitmap bitmap = bitmapDrawable.getBitmap();
-            BitmapDrawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap,
-                    sizeOfDrawable,
-                    sizeOfDrawable, true));
-            return d;
-        }
-
     }
 }
