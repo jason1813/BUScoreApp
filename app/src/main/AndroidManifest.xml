@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChooseMatchupActivity"></activity>
+        <activity android:name=".PopupActivity"
+            android:theme="@style/AppTheme.transparent"
+            ></activity>
     </application>
 
 </manifest>

@@ -35,6 +35,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
     /* Matchup XML content */
     LinearLayout ll;
     LayoutParams lp;
+    String league;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
         /* get the league that was selected and current date */
         Intent leagueIntent = getIntent();
-        String league = leagueIntent.getStringExtra("league");
+        league = leagueIntent.getStringExtra("league");
         String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
 
         /* initialize API URL */
@@ -104,28 +105,43 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
                 // grab the current dates matchups in a JSONArray
                 JSONObject obj = new JSONObject(response);
-                JSONArray games = obj.getJSONObject("dailygameschedule").getJSONArray("gameentry");
 
-                /* grab all of the home and away team's names for every matchup, add them to a button,
-                   and add that button to the layout                       */
-                for (int i = 0; i < games.length(); i++){
-                    
-                    String awayTeam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
-                    String homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
-                    String matchUpStr = awayTeam + "\n" + homeTeam;
-
-                    Button button = new Button(getApplicationContext());
-                    button.setTextSize(30);
-                    button.setGravity(Gravity.START);
-                    button.setText(matchUpStr);
-
-                    ll.addView( button, lp);
-
+                if(!obj.getJSONObject("dailygameschedule").has("gameentry")){
+                    MakePopup("There are no " + league.toUpperCase() + "\ngames today");
                 }
 
-            } catch (JSONException e) {
+                else {
+
+                    JSONArray games = obj.getJSONObject("dailygameschedule").getJSONArray("gameentry");
+
+                    /* grab all of the home and away team's names for every matchup, add them to a button,
+                       and add that button to the layout                       */
+                    for (int i = 0; i < games.length(); i++) {
+
+                        String awayTeam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
+                        String homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
+                        String matchUpStr = awayTeam + "\n" + homeTeam;
+
+                        Button button = new Button(getApplicationContext());
+                        button.setTextSize(30);
+                        button.setGravity(Gravity.START);
+                        button.setText(matchUpStr);
+
+                        ll.addView(button, lp);
+
+                    }
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
+                MakePopup("ERROR!!!\n\nThere was a problem with the API.");
             }
         }
+
+        private void MakePopup(String message){
+            Intent popup = new Intent(ChooseMatchupActivity.this, PopupActivity.class);
+            popup.putExtra("message", message);
+            startActivity(popup);
+        }
+        
     }
 }
