@@ -22,10 +22,10 @@
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
         android:paddingTop="55dp"
-        android:text="Bears"
         android:textAlignment="center"
         android:textSize="56sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="Bears" />
 
     <TextView
         android:id="@+id/vs_TextView"
@@ -43,8 +43,8 @@
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:text="Browns"
         android:textAlignment="center"
         android:textSize="56sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="Browns" />
 </LinearLayout>
