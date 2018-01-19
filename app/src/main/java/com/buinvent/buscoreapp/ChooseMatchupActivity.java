@@ -31,10 +31,10 @@ public class ChooseMatchupActivity extends AppCompatActivity {
     /* Debug tag. */
     private static final String TAG = "ChooseMatchupActivity";
 
-    /* Matchup XML content */
-    LinearLayout ll;
-    LayoutParams lp;
-    String league;
+    /* Activity members. */
+    private LinearLayout mLinearLayout;
+    private LayoutParams mButtonLayoutParams;
+    private String mLeague;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +44,16 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
         // Get the league that was selected and current date.
         Intent leagueIntent = getIntent();
-        league = leagueIntent.getStringExtra("league");
+        mLeague = leagueIntent.getStringExtra("league");
         String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
 
         // Initialize API URL.
-        String apiFeedUrl = "https://api.mysportsfeeds.com/v1.1/pull/" + league +
+        String apiFeedUrl = "https://api.mysportsfeeds.com/v1.1/pull/" + mLeague +
                 "/current/daily_game_schedule.json?fordate=" + timeStamp;
 
         // Initialize XML content
-        ll = findViewById(R.id.matchup_layout);
-        lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        mLinearLayout = findViewById(R.id.matchup_layout);
+        mButtonLayoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
 
         // Set API Authentication.
@@ -123,7 +123,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
 
                 // Display message if there were no games for the selected league.
                 if (!obj.getJSONObject("dailygameschedule").has("gameentry")) {
-                    displayMessage("There are no " + league.toUpperCase() + "\ngames today");
+                    displayMessage("There are no " + mLeague.toUpperCase() + "\ngames today");
                     return;
                 }
 
@@ -143,7 +143,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                     button.setOnClickListener(view -> setMatchup(awayTeam, homeTeam));
 
                     // Add the button to the layout.
-                    ll.addView(button, lp);
+                    mLinearLayout.addView(button, mButtonLayoutParams);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
