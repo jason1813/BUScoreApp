@@ -163,7 +163,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Intent setMatchup = new Intent(getApplicationContext(), MatchupSet.class);
+                    Intent setMatchup = new Intent(getApplicationContext(), MatchupSetActivity.class);
                     setMatchup.putExtra("away", away);
                     setMatchup.putExtra("home", home);
                     startActivity(setMatchup);

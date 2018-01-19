@@ -26,7 +26,7 @@
                 android:value=".ChooseLeagueActivity" />
         </activity>
 
-        <activity android:name=".MatchupSet"
+        <activity android:name=".MatchupSetActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
