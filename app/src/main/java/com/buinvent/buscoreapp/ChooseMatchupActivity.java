@@ -72,8 +72,8 @@ public class ChooseMatchupActivity extends AppCompatActivity {
      */
     private void setMatchup(final String away, final String home) {
         Intent intent = new Intent(getApplicationContext(), MatchupSetActivity.class);
-        intent.putExtra("away", away);
-        intent.putExtra("home", home);
+        intent.putExtra(MatchupSetActivity.EXTRA_AWAY_TEAM, away);
+        intent.putExtra(MatchupSetActivity.EXTRA_HOME_TEAM, home);
         startActivity(intent);
     }
 
@@ -91,7 +91,6 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         protected void onPreExecute() {}
 
         protected String doInBackground(String... urls) {
-
             String url = urls[0];
             String response = null;
 
@@ -109,7 +108,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                 }
                 response = stringBuilder.toString();
 
-            } catch(Exception e) {
+            } catch (Exception e) {
                 Log.e(TAG, "Exception", e);
             }
 
