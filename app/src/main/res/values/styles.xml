@@ -13,4 +13,11 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
+    <!-- Style used for buttons in ChooseLeagueActivity. -->
+    <style name="LeagueButton" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">52sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">15dp</item>
+    </style>
+
 </resources>

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_vertical_margin"
-    tools:context="com.buinvent.buscoreapp.ChooseLeagueActivity">
+    tools:context=".ChooseLeagueActivity">
 
 
     <TextView
@@ -25,11 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/league_button_margin"
         android:onClick="onLeagueSelected"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
         android:text="@string/button_nfl"
-        android:textSize="52sp"
-        android:textStyle="bold" />
+        style="@style/LeagueButton" />
 
     <Button
         android:id="@+id/button_nba"
@@ -37,11 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/league_button_margin"
         android:onClick="onLeagueSelected"
-        android:paddingBottom="15sp"
-        android:paddingTop="15sp"
         android:text="@string/button_nba"
-        android:textSize="52sp"
-        android:textStyle="bold" />
+        style="@style/LeagueButton" />
 
     <Button
         android:id="@+id/button_nhl"
@@ -49,11 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/league_button_margin"
         android:onClick="onLeagueSelected"
-        android:paddingBottom="15sp"
-        android:paddingTop="15sp"
         android:text="@string/button_nhl"
-        android:textSize="52sp"
-        android:textStyle="bold" />
+        style="@style/LeagueButton" />
 
     <Button
         android:id="@+id/button_mlb"
@@ -61,9 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/league_button_margin"
         android:onClick="onLeagueSelected"
-        android:paddingBottom="15sp"
-        android:paddingTop="15sp"
         android:text="@string/button_mlb"
-        android:textSize="52sp"
-        android:textStyle="bold" />
+        style="@style/LeagueButton" />
 </LinearLayout>
