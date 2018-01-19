@@ -19,13 +19,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ChooseMatchupActivity">
+        <activity android:name=".ChooseMatchupActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ChooseLeagueActivity" />
         </activity>
 
-        <activity android:name=".MatchupSet">
+        <activity android:name=".MatchupSet"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ChooseMatchupActivity" />
