@@ -6,12 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -73,6 +74,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         protected void onPreExecute() {}
 
         protected String doInBackground(String... urls) {
+
             String url = urls[0];
             String response = null;
 
@@ -98,49 +100,76 @@ public class ChooseMatchupActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String response) {
+
             Log.v(TAG, "HTTP Response: " + response);
 
             /* Grab all matchups from API and add them to the layout */
             try{
 
-                // grab the current dates matchups in a JSONArray
+                /* grab the current dates matchups in a JSONArray */
                 JSONObject obj = new JSONObject(response);
 
+                /* make a popup if there were no games for the selected league */
                 if(!obj.getJSONObject("dailygameschedule").has("gameentry")){
-                    MakePopup("There are no " + league.toUpperCase() + "\ngames today");
+                    makePopup("There are no " + league.toUpperCase() + "\ngames today");
                 }
 
                 else {
 
                     JSONArray games = obj.getJSONObject("dailygameschedule").getJSONArray("gameentry");
+                    String awayTeam;
+                    String homeTeam;
+                    String matchUpStr;
+                    Button button;
 
-                    /* grab all of the home and away team's names for every matchup, add them to a button,
-                       and add that button to the layout                       */
                     for (int i = 0; i < games.length(); i++) {
 
-                        String awayTeam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
-                        String homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
-                        String matchUpStr = awayTeam + "\n" + homeTeam;
+                        /* grab the home and away team's names for every matchup */
+                        awayTeam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
+                        homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
+                        matchUpStr = awayTeam + "\n" + homeTeam;
 
-                        Button button = new Button(getApplicationContext());
+                        /* add the matchup to a button */
+                        button = new Button(getApplicationContext());
                         button.setTextSize(30);
                         button.setGravity(Gravity.START);
                         button.setText(matchUpStr);
 
+                        /* add the button to the layout and give it a listener to go to the "matchup set" screen */
                         ll.addView(button, lp);
+                        setOnClick(button, awayTeam, homeTeam);
 
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                MakePopup("ERROR!!!\n\nThere was a problem with the API.");
+                makePopup("ERROR!!!\n\nThere was a problem with the API.");
             }
         }
 
-        private void MakePopup(String message){
+        /* popup function to make a popup incase there are no games for a selected league or there is an API error */
+        private void makePopup(String message){
             Intent popup = new Intent(ChooseMatchupActivity.this, PopupActivity.class);
             popup.putExtra("message", message);
             startActivity(popup);
+        }
+
+
+        /* function to pass the button, away, and home team's name to add an onclick listener for each matchup */
+        private void setOnClick(Button button, final String away, final String home){
+
+            button.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    Intent setMatchup = new Intent(getApplicationContext(), MatchupSet.class);
+                    setMatchup.putExtra("away", away);
+                    setMatchup.putExtra("home", home);
+                    startActivity(setMatchup);
+
+                }
+            });
         }
         
     }
