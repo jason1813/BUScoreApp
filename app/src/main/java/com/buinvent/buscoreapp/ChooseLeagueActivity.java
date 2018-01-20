@@ -1,11 +1,11 @@
 package com.buinvent.buscoreapp;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class ChooseLeagueActivity extends AppCompatActivity {
+public class ChooseLeagueActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
