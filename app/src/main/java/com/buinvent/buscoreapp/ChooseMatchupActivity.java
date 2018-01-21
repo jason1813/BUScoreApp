@@ -1,8 +1,8 @@
 package com.buinvent.buscoreapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,7 +22,7 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ChooseMatchupActivity extends Activity {
+public class ChooseMatchupActivity extends AppCompatActivity {
 
     /* Data API URL and authentication. */
     private static final String API_USERNAME = "buinvent";

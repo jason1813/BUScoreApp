@@ -1,11 +1,11 @@
 package com.buinvent.buscoreapp;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class MatchupSetActivity extends Activity {
+public class MatchupSetActivity extends AppCompatActivity {
     public static final String EXTRA_AWAY_TEAM = "com.buinvent.buscoreapp.AWAY_TEAM";
     public static final String EXTRA_HOME_TEAM = "com.buinvent.buscoreapp.HOME_TEAM";
 
