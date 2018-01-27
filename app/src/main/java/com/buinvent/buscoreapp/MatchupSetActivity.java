@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 import io.particle.android.sdk.cloud.ParticleCloud;
 import io.particle.android.sdk.cloud.ParticleCloudException;
@@ -36,30 +40,8 @@ public class MatchupSetActivity extends AppCompatActivity {
         away.setText(awayTeam);
         home.setText(homeTeam);
 
+
         ParticleCloudSDK.init(this);
-        
-        @SuppressLint("StaticFieldLeak")
-        AsyncTask task = new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    ParticleCloudSDK.getCloud().logIn("jmmorris2@mail.bradley.edu", "GoBucks");
-                    System.out.println("logged in!!!!!!!!");
-
-                } catch (final ParticleCloudException e) {
-                    Runnable mainThread = () -> {
-                        Toaster.l(MatchupSetActivity.this, e.getBestMessage());
-                        e.printStackTrace();
-                        Log.d("info", e.getBestMessage());
-                    };
-                    runOnUiThread(mainThread);
-
-                }
-
-                return null;
-            }
-
-        };
 
         Async.executeAsync(ParticleCloudSDK.getCloud(), new Async.ApiWork<ParticleCloud, Object>() {
 
@@ -83,5 +65,31 @@ public class MatchupSetActivity extends AppCompatActivity {
             }
         });
 
+
     }
-}
+
+
+//    class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
+//
+//        protected void onPreExecute() {}
+//
+//        protected String doInBackground(Void... values) {
+//
+//                try {
+//                    ParticleCloudSDK.getCloud().logIn("jmmorris2@mail.bradley.edu", "GoBucks");
+//                    Toaster.l(MatchupSetActivity.this, "Logged in");
+//
+//                } catch (final ParticleCloudException e) {
+//                    Runnable mainThread = () -> {
+//                        Toaster.l(MatchupSetActivity.this, e.getBestMessage());
+//                        e.printStackTrace();
+//                        Log.d("info", e.getBestMessage());
+//                    };
+//                    runOnUiThread(mainThread);
+//
+//                }
+//
+//                return null;
+//            }
+//        }
+    }
