@@ -70,10 +70,12 @@ public class ChooseMatchupActivity extends AppCompatActivity {
     /*
      * Start an instance of MatchupSetActivity.
      */
-    private void setMatchup(final String away, final String home) {
+    private void setMatchup(final String away, final String home, final String league, final String abbreviation) {
         Intent intent = new Intent(getApplicationContext(), MatchupSetActivity.class);
         intent.putExtra(MatchupSetActivity.EXTRA_AWAY_TEAM, away);
         intent.putExtra(MatchupSetActivity.EXTRA_HOME_TEAM, home);
+        intent.putExtra(MatchupSetActivity.EXTRA_LEAGUE, league);
+        intent.putExtra(MatchupSetActivity.EXTRA_ABBREVIATION, abbreviation);
         startActivity(intent);
     }
 
@@ -133,6 +135,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                     // Grab the home and away team's names for every matchup.
                     String awayTeam = games.getJSONObject(i).getJSONObject("awayTeam").getString("Name");
                     String homeTeam = games.getJSONObject(i).getJSONObject("homeTeam").getString("Name");
+                    String teamAbbreviation = games.getJSONObject(i).getJSONObject("homeTeam").getString("Abbreviation");
                     String matchUpStr = awayTeam + "\n" + homeTeam;
 
                     // Create a button for the matchup.
@@ -140,7 +143,7 @@ public class ChooseMatchupActivity extends AppCompatActivity {
                     button.setTextSize(30);
                     button.setGravity(Gravity.START);
                     button.setText(matchUpStr);
-                    button.setOnClickListener(view -> setMatchup(awayTeam, homeTeam));
+                    button.setOnClickListener(view -> setMatchup(awayTeam, homeTeam, mLeague, teamAbbreviation));
 
                     // Add the button to the layout.
                     mLinearLayout.addView(button, mButtonLayoutParams);
