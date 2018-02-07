@@ -58,9 +58,8 @@ public class MatchupSetActivity extends AppCompatActivity {
                 try {
                     List<String> teamLeague = new ArrayList<>();
                     teamLeague.add( mLeague.toUpperCase() + " " + teamAbbreviation );
-                    System.out.println("teamleague = " + teamLeague);
 
-                    mDevice.callFunction("teamLeague", teamLeague);
+                    mDevice.callFunction("team_league", teamLeague);
 
                 } catch (Exception e) {
                     e.printStackTrace();
