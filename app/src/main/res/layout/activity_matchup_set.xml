@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:paddingTop="16dp"
-        android:text="@string/header_matchup_set"
         android:textAlignment="center"
         android:textSize="35sp" />
 
@@ -31,7 +30,6 @@
         android:id="@+id/vs_TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="VS"
         android:textAlignment="center"
         android:textSize="30sp"
         android:paddingBottom="10dp"
