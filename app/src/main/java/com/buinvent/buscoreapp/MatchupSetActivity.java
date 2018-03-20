@@ -84,14 +84,9 @@ public class MatchupSetActivity extends AppCompatActivity {
             // Particle cloud and the team_league function was called successfully
             @Override
             public void onFailure(@NonNull ParticleCloudException e) {
-                displayMessage("Error!!!\n\nMatchup could not be set");
+                matchupSet.setText("Error!!!");
+                vsText.setText("Matchup could not be set");
             }
         });
-    }
-
-    private void displayMessage(String message) {
-        Intent popup = new Intent(this, PopupActivity.class);
-        popup.putExtra("message", message);
-        startActivity(popup);
     }
 }
